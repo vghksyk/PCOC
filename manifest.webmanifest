@@ -1,13 +1,1 @@
-{
-  "name": "PCOC 症狀評估與照護",
-  "short_name": "PCOC評估",
-  "start_url": "./index.html",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#f4f7f6",
-  "theme_color": "#24786b",
-  "icons": [
-    {"src":"icon-192.png","sizes":"192x192","type":"image/png"},
-    {"src":"icon-512.png","sizes":"512x512","type":"image/png"}
-  ]
-}
+{"name":"PCOC 症狀評估與照護","short_name":"PCOC","start_url":"./index.html","display":"standalone","background_color":"#f4f7f6","theme_color":"#24786b","icons":[{"src":"icon-192.png","sizes":"192x192","type":"image/png"},{"src":"icon-512.png","sizes":"512x512","type":"image/png"}]}
