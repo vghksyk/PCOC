@@ -5,9 +5,10 @@ window.PCOC_CONFIG = Object.freeze({
   tenantId: '24de0681-c8f7-46e8-8da7-1f5b393d834d',
   redirectUri: 'https://vghksyk.github.io/PCOC/redirect.html',
   graphScope: 'Sites.Selected',
-  siteId: '',           // 待資訊室提供，非 Secret
-  listId: '',           // 待資訊室提供，非 Secret
-  fieldMappingVerified: false, // 對照 SharePoint Internal Name 和型態後才改 true
+  siteId: 'cmh2400-my.sharepoint.com,1b4a5c0c-0f6f-4cc8-8f98-fa9fb3847fc5,967c1bd9-5b02-4bdc-aa95-1da266e94ebf',           
+  listId: 'a4414442-82af-4b39-ac88-d6cfb5532318',
+  fieldMappingVerified: true, // 對照 SharePoint Internal Name 和型態後才改 true
+  includeTitle: true,
   fieldMap: { // 左邊是本網頁輸出欄位，右邊填 SharePoint 真正 Internal Name
     record_id: 'record_id', saved_at: 'saved_at', app_version: 'app_version',
     data_schema_version: 'data_schema_version', date: 'date', case_id: 'case_id',
