@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#24786b">
+<title>PCOC 症狀評估｜清醒／不清醒雙量表</title>
+<style>
+:root{--bg:#f4f7f6;--card:#fff;--ink:#1f2b2a;--muted:#6d7b78;--line:#dce5e2;--accent:#24786b;--soft:#e8f3f0;--warn:#9b6b1f;--danger:#a54545}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--ink)}
+header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);padding:14px 16px 10px;backdrop-filter:blur(10px)}
+.wrap{max-width:820px;margin:auto}.title{font-weight:800;font-size:20px}.sub{font-size:12px;color:var(--muted);margin-top:3px}.progress{height:7px;background:#e8eeec;border-radius:99px;margin-top:10px;overflow:hidden}.bar{height:100%;width:0;background:var(--accent);transition:.2s}
+main{max-width:820px;margin:auto;padding:14px 14px 110px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;margin:0 0 12px;box-shadow:0 2px 9px rgba(25,60,52,.04)}
+.section{font-size:17px;font-weight:800;margin-bottom:4px}.hint{font-size:12px;color:var(--muted);line-height:1.45;margin-bottom:11px}.options{display:grid;grid-template-columns:1fr 1fr;gap:9px}.opt{appearance:none;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:13px;padding:12px;min-height:72px;color:var(--ink);font-size:14px;line-height:1.4}.opt b{display:block;font-size:16px;margin-bottom:3px}.opt.selected{border-color:var(--accent);background:var(--soft);box-shadow:0 0 0 1px var(--accent) inset}.opt.s3.selected{border-color:var(--danger);background:#faeeee}.field{width:100%;border:1px solid var(--line);border-radius:11px;padding:11px 12px;font-size:16px;background:#fff;margin-top:8px}.summary{display:none}.phase{font-size:28px;font-weight:900;margin:3px 0 5px}.badge{display:inline-block;padding:5px 9px;border-radius:99px;background:var(--soft);color:var(--accent);font-weight:700;font-size:13px}.rows{margin-top:12px}.row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}.row:last-child{border-bottom:0}.row strong{white-space:nowrap}.actions{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.97);border-top:1px solid var(--line);padding:10px 14px calc(10px + env(safe-area-inset-bottom));z-index:20}.actions .wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:9px}.btn{border:0;border-radius:13px;padding:14px;font-size:16px;font-weight:800}.secondary{background:#edf1f0;color:#33413f}.primary{background:var(--accent);color:#fff}.tiny{font-size:11px;color:var(--muted);line-height:1.4;margin-top:8px}.switchline{display:flex;gap:8px;align-items:center;margin-top:8px}.chip{border:1px solid var(--line);border-radius:99px;background:#fff;padding:8px 11px}.chip.on{background:var(--soft);border-color:var(--accent);color:var(--accent);font-weight:700}@media(max-width:520px){.options{grid-template-columns:1fr}.opt{min-height:62px}.title{font-size:18px}}
+.conscious-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.conscious-btn{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:16px 12px;text-align:left;font-size:15px;font-weight:800;color:var(--ink)}.conscious-btn small{display:block;color:var(--muted);font-weight:500;margin-top:5px}.conscious-btn.on{border-color:var(--accent);background:var(--soft);color:var(--accent)}.sas-options{display:grid;grid-template-columns:repeat(11,1fr);gap:5px}.sas-btn{border:1px solid var(--line);background:#fff;border-radius:9px;padding:10px 2px;font-size:14px;font-weight:800;color:var(--ink)}.sas-btn.selected{background:var(--soft);border-color:var(--accent);color:var(--accent)}.sas-legend{font-size:11px;color:var(--muted);margin-top:8px}.mode-note{padding:10px 12px;border-radius:11px;background:#f8faf9;color:var(--muted);font-size:12px;margin-top:10px}@media(max-width:520px){.sas-options{grid-template-columns:repeat(6,1fr)}.conscious-grid{grid-template-columns:1fr}}@media print{header,.actions,.no-print{display:none!important}main{padding:0}.card{box-shadow:none;break-inside:avoid}}
+.elig-head{width:100%;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);background:#fff;border-radius:12px;padding:13px 14px;margin-top:8px;font-size:15px;font-weight:800;text-align:left}.elig-head.open{border-color:var(--accent);background:var(--soft)}.elig-arrow{font-size:18px;transition:.2s}.elig-head.open .elig-arrow{transform:rotate(180deg)}.elig-body{display:none;padding:7px 4px 10px}.elig-body.open{display:block}.elig-body .chip{display:block;width:100%;margin:6px 0;text-align:left;border-radius:11px;line-height:1.4}details.elig-detail{border:1px solid var(--line);border-radius:12px;background:#fff;margin-top:8px;overflow:hidden}details.elig-detail summary{padding:13px 14px;font-size:15px;font-weight:800;cursor:pointer;list-style:none}details.elig-detail summary::-webkit-details-marker{display:none}details.elig-detail summary:after{content:"⌄";float:right;font-size:18px}details.elig-detail[open] summary{background:var(--soft);color:var(--accent)}details.elig-detail[open] summary:after{content:"⌃"}.elig-static-body{padding:7px 10px 10px}.elig-check{display:flex;gap:10px;align-items:flex-start;padding:11px 10px;margin:6px 0;border:1px solid var(--line);border-radius:11px;background:#fff;font-size:14px;line-height:1.4}.elig-check input{width:20px;height:20px;flex:0 0 auto;accent-color:var(--accent)}.nonecheck{margin-top:12px}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.kpi{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfcfc}.kpi .n{font-size:24px;font-weight:900;margin-top:4px}.bars{margin-top:12px}.barrow{display:grid;grid-template-columns:90px 1fr 42px;gap:8px;align-items:center;margin:9px 0;font-size:12px}.track{height:12px;border-radius:99px;background:#e8eeec;overflow:hidden}.fill{height:100%;background:var(--accent);border-radius:99px}.bi-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.panel{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}.panel h4{margin:0 0 8px;font-size:14px}.empty{padding:22px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}@media(max-width:600px){.kpis{grid-template-columns:1fr 1fr}.bi-grid{grid-template-columns:1fr}}
+.record-box{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.record-preview{width:100%;min-height:150px;resize:vertical;border:1px solid var(--line);border-radius:12px;padding:12px 13px;font:inherit;font-size:14px;line-height:1.65;background:#fbfcfc;color:var(--ink)}
+.record-actions{display:grid;grid-template-columns:1.3fr 1fr;gap:8px;margin-top:9px}
+.record-actions .btn{padding:12px}
+@media(max-width:520px){.record-actions{grid-template-columns:1fr}}
+
+.plan-box{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.plan-phase{padding:11px 12px;border-radius:11px;background:#f8faf9;margin:8px 0 12px;font-size:13px;line-height:1.55}
+.plan-group{margin-top:12px}.plan-title{font-weight:800;font-size:14px;margin-bottom:7px}
+.plan-check{display:flex;gap:9px;align-items:flex-start;border:1px solid var(--line);border-radius:11px;padding:10px 11px;margin:7px 0;background:#fff;font-size:13px;line-height:1.45}
+.plan-check.priority{border-color:#d9b56d;background:#fff9ed}
+.plan-check input{width:19px;height:19px;flex:0 0 auto;accent-color:var(--accent);margin-top:1px}
+.plan-source{font-size:11px;color:var(--muted);display:block;margin-top:2px}
+.plan-note{font-size:11px;color:var(--muted);line-height:1.45;margin-top:8px}
+
+
+[hidden]{display:none!important}
+.auth-gate{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:22px;background:linear-gradient(160deg,#e4f3ee,#f7faf8)}
+.auth-card{width:min(480px,100%);padding:28px 24px;border-radius:22px;background:white;box-shadow:0 15px 45px rgba(29,69,59,.10);border:1px solid #dbe7e4}
+.auth-card h1{font-size:25px;margin:10px 0}.auth-card p{line-height:1.55;color:#556360}
+.auth-logo{font-weight:900;font-size:22px;color:var(--accent)}.auth-logo span{font-size:13px;padding:4px 9px;border-radius:20px;background:#e7f3f0}
+.auth-alert{padding:12px;border-radius:12px;background:#fff5db;border:1px solid #ead8aa;font-size:13px}
+.auth-message{padding:12px;border:1px solid var(--line);border-radius:11px;margin:14px 0;white-space:pre-line;font-size:14px}
+.auth-card .btn{width:100%;cursor:pointer}.btn:disabled{opacity:.48;cursor:not-allowed}
+.login-strip{background:#e8f3f0;border-bottom:1px solid #cbded8}.login-strip-inner{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:8px 16px;font-size:13px}
+.login-strip .chip{padding:5px 10px}
+.upload-panel{padding:15px;background:#f2f8f6;border:1px solid #bcd9d0;border-radius:13px;margin-top:18px}
+.upload-consent{display:flex;gap:9px;align-items:flex-start;line-height:1.5;font-size:14px}
+.upload-consent input{width:20px;height:20px;flex:0 0 auto;accent-color:var(--accent)}
+.upload-state{font-size:13px;line-height:1.55;margin-top:12px;padding:11px;border-radius:10px;background:white;white-space:pre-line}
+</style>  <script type="module" crossorigin src="/PCOC/assets/main-JKTzuVWn.js"></script>
+  <link rel="modulepreload" crossorigin href="/PCOC/assets/Configuration-CYwfBFeG.js">
+</head>
+<body><section id="authGate" class="auth-gate" role="region" aria-label="奇美 Microsoft 365 登入">
+  <div class="auth-card">
+    <div class="auth-logo">PCOC <span>1.9.3</span></div>
+    <h1>重症 PCOC 電子評估</h1>
+    <p>請先使用獲院方授權的奇美 Microsoft 365 帳號登入，再進行 TEST 評估。</p>
+    <p class="auth-alert"><b>目前僅供 TEST 串接驗證。</b>尚未核准正式臨床使用，勿輸入真實病歷號、姓名、聯絡方式或任何病人個資。</p>
+    <div id="authMessage" class="auth-message" role="status" aria-live="polite">正在載入登入模組…</div>
+    <button type="button" class="btn primary" id="loginBtn" disabled>登入奇美 Microsoft 365</button>
+    <p class="tiny">登入由 Microsoft Entra ID 處理，網頁不會要求或保存你的密碼，也不會使用 Client Secret。</p>
+  </div>
+</section>
+<div id="pcocApp" hidden><header><div class="wrap"><div class="title">PCOC 症狀評估｜清醒／不清醒</div><div class="sub">V1.9.3｜護理師輪班獨立新增・奇美 M365 登入・SharePoint 單向新增・護理紀錄複製</div><div class="progress"><div class="bar" id="bar"></div></div></div></header>
+<div class="login-strip" id="loginStrip"><div class="wrap login-strip-inner"><span>評估護理師（M365）：<b id="signedInAccount">—</b></span><button class="chip" type="button" id="logoutBtn">登出</button></div></div>
+<main>
+<div class="card" style="border-color:#e9ce8b;background:#fff9e8"><b>TEST 串接版</b><div class="hint" style="margin:5px 0 0">同一個 TEST 病歷號可由多位護理師各自新增評估，不會互相覆蓋。Title = case_id（病歷號），record_id = 實際登入的評估護理師，assessment_id = 每次評估 UUID。按「完成評估」僅產生預覽，核對後再上傳。此版不讀取舊評估、不儲存本機病人資料。</div></div>
+<div class="card no-print" id="patientLinkCard" hidden><div class="section">⓪ 病人連結｜院內介接預留</div><div class="hint">操作概念比照院內設備／病人連結：正式版可由員工登入身分＋病歷條碼／病歷號辨識個案，再由院內 API/HIS 建立或取得 PCOC Case ID。<b>目前為前端 prototype，未連接院內病歷系統；測試請只用虛構編號。</b></div><div class="options"><div><label class="tiny">員工編號（測試）</label><input class="field" id="assessorId" autocomplete="off" placeholder="例如 TEST-N001"></div><div><label class="tiny">病歷號／條碼（測試）</label><input class="field" id="patientLookup" autocomplete="off" inputmode="numeric" placeholder="掃描或輸入 TEST 編號"></div></div><div class="switchline"><button class="chip" id="scanMock">▣ 模擬掃描條碼</button><button class="chip" id="linkPatient">連結病人</button><span class="badge" id="linkStatus">尚未連結</span></div><div class="tiny">正式版流程：登入院內帳號 → 掃病人手圈／輸入病歷號 → 院內系統回傳 encounter／PCOC episode → 本頁只保留受控 Case ID。公開 GitHub 版不儲存病歷號。</div></div>
+<div class="card no-print" id="caseCard"><div class="section">⓪-1 病歷號（case_id／TEST）</div><div class="hint">case_id 對應病歷號（MRN）；同一病人各班評估填相同號碼。<b>目前只可輸入 TEST- 開頭的虛構病歷號。</b> 暫不與 HIS 連線。</div><input class="field" id="caseId" autocomplete="off" autocapitalize="characters" placeholder="虛構病歷號（例如 TEST-001）"><div class="tiny" id="caseSource">同一 TEST 病歷號可新增多筆評估；每筆由不同 assessment_id 區分。正式 MRN 必須由院方核准系統帶入。</div></div>
+<div class="card no-print" id="admissionCard"><div class="section">⓪-2 本次住院起始時間（encounter_id）</div><div class="hint">目前 SharePoint 的 <code>encounter_id</code> 已採 <b>DateTime（日期與時間）</b>，請依院內正式入院起始時間選擇，精準到分鐘。同一次住院的每位護理師應填寫相同入院時間；不可使用轉床或本班評估時間替代。<b>這不是 HIS 驗證後的住院序號。</b></div><label class="tiny" for="encounterDateTime">住院時間（台灣時間，24 小時制；TEST 模式請使用虛構時間）</label><input class="field" id="encounterDateTime" type="datetime-local" step="60" autocomplete="off" required><div class="tiny">資料傳送時保留台灣時間 +08:00 時區資訊，方便正確排序及日期計算。<code>admitted_at</code> 尚未建立，未來若導入正式住院事件 ID，必須先拆分兩個欄位。</div></div>
+<div class="card no-print" id="eligibilityCard"><div class="section">① 收案條件</div><div class="hint">先確認是否符合收案。依 114.2 制定表單：第（二）至（八）項任一符合即可收案；第（一）心衰竭需符合至少 2 項。</div><div id="eligibilityStatic"><details class="elig-detail"><summary>（一）心衰竭｜需符合至少 2 項</summary><div class="elig-static-body"><label class="elig-check"><input type="checkbox" data-eg="0" data-eo="0"><span>EF ≤20%</span></label><label class="elig-check"><input type="checkbox" data-eg="0" data-eo="1"><span>CHF 分期 ≥ III</span></label><label class="elig-check"><input type="checkbox" data-eg="0" data-eo="2"><span>曾 CPCR（含病史）</span></label><label class="elig-check"><input type="checkbox" data-eg="0" data-eo="3"><span>反覆心衰竭住院</span></label></div></details><details class="elig-detail"><summary>（二）腦衰竭</summary><div class="elig-static-body"><label class="elig-check"><input type="checkbox" data-eg="1" data-eo="0"><span>嚴重腦傷／腦創傷／梗塞（出血／缺血）或缺氧性腦病變 1 週，GCS 仍 ≤8 分或瀕死徵象</span></label></div></details><details class="elig-detail"><summary>（三）肺衰竭</summary><div class="elig-static-body"><label class="elig-check"><input type="checkbox" data-eg="2" data-eo="0"><span>肺纖維化、COPD 併 PaO₂ ≤55、PCO₂ ≥50、SpO₂ ≤88%、肺心症或肺高壓造成右心衰竭</span></label></div></details><details class="elig-detail"><summary>（四）肝衰竭</summary><div class="elig-static-body"><label class="elig-check"><input type="checkbox" data-eg="3" data-eo="0"><span>PT INR >1.5 且 Alb &lt;2.5，併肝性腦病變（NH₃ >72）、自發細菌性腹膜炎或食道靜脈瘤出血</span></label></div></details><details class="elig-detail"><summary>（五）腎衰竭</summary><div class="elig-static-body"><label class="elig-check"><input type="checkbox" data-eg="4" data-eo="0"><span>急性：Cr >4，併洗腎或拒洗腎</span></label><label class="elig-check"><input type="checkbox" data-eg="4" data-eo="1"><span>慢性：ESRD 併洗腎，或 CKD ≥4 期（GFR &lt;30）併洗腎或拒洗腎</span></label></div></details><details class="elig-detail"><summary>（六）癌末</summary><div class="elig-static-body"><label class="elig-check"><input type="checkbox" data-eg="5" data-eo="0"><span>癌轉移且對癌症治療效果不佳，並有高鈣、惡性疼痛、呼吸困難、發燒、腫瘤潰瘍或出血等症狀</span></label></div></details><details class="elig-detail"><summary>（七）安寧／末期判定</summary><div class="elig-static-body"><label class="elig-check"><input type="checkbox" data-eg="6" data-eo="0"><span>已會診安寧執行末期判定、診斷</span></label></div></details><details class="elig-detail"><summary>（八）其他</summary><div class="elig-static-body"><label class="elig-check"><input type="checkbox" data-eg="7" data-eo="0"><span>其他或罕見疾病</span></label></div></details><label class="elig-check nonecheck"><input type="checkbox" id="noneStatic"><span>以上皆不符合</span></label></div><div class="card" id="eligibilityResult" style="margin:12px 0 0;background:#f8faf9"><b id="eligibilityTitle">尚未判定收案資格</b><div class="tiny" id="eligibilityHint">請點選符合的條件；若皆不符合則不收案。</div></div></div>
+<div class="card no-print"><div class="section">② 意識狀態</div><div class="hint">先選病人目前意識狀態，系統只顯示對應量表。</div><div class="conscious-grid"><button type="button" class="conscious-btn" id="awakeBtn">意識清楚｜SAS 0–10<small>睡眠、食慾、噁心嘔吐、腸胃不適、呼吸困難、倦怠疲倦、疼痛</small></button><button type="button" class="conscious-btn" id="unconsciousBtn">意識不清｜客觀評估 0–3<small>CPOT、腸胃道、水腫、口腔清潔、身體清潔、翻身／壓傷</small></button></div><div class="mode-note" id="modeNote">尚未選擇意識狀態。</div></div>
+<div class="card"><div class="section">③ 本次評估</div><input class="field" id="date" type="date"><input class="field" id="dx" placeholder="主要診斷（選填；避免可識別資訊）"><div class="options" style="margin-top:8px"><select class="field" id="unit" style="margin:0"><option value="">病房別（選填）</option><option>3BI team 1</option><option>3BI team 2</option><option>3CI</option><option>4BI</option><option>5CI</option><option>6BI</option><option>燒傷加護病房</option><option>RCC</option></select><select class="field" id="shift" style="margin:0"><option value="">班別（選填）</option><option>白班</option><option>小夜</option><option>大夜</option></select></div><div class="switchline"><button class="chip on" data-status="每日">每日</button><button class="chip" data-status="惡化班">惡化班</button><button class="chip" data-status="死亡班">死亡班</button></div></div>
+<div class="card no-print"><div class="section">④ 社會／心理／靈性評估</div><div class="hint">依院內表單，此部分填寫對象為病人或家屬（每日評估）。若本班無適用評估對象，可關閉。</div><div class="switchline"><button class="chip on" id="familyOn">納入病人／家屬評估</button><button class="chip" id="familyOff">本班無適用對象</button></div></div><div class="card no-print" id="sasNaCard" style="display:none"><div class="section">SAS 不適用</div><div class="hint">院內清醒版表單設有「不適用（須寫原因）」欄。若本次 SAS 不適用，請輸入原因；一般評估可留白。</div><input class="field" id="sasNaReason" placeholder="不適用原因（選填）"></div><div id="form"></div>
+<div class="card no-print" id="closureCard" hidden><div class="section">⑤ 結案資料</div><div class="hint">僅在 PCOC 個案結案時填寫；每日／惡化班評估不需填。死亡班評估與結案資料分開保存。</div><div class="switchline"><button type="button" class="chip" id="closureOff">本次不結案</button><button type="button" class="chip" id="closureOn">進入結案</button></div><div id="closureFields" style="display:none;margin-top:12px"><div class="section" style="font-size:15px">道德關懷需求</div><div class="switchline"><button type="button" class="chip" id="ethicsYes">需要</button><button type="button" class="chip" id="ethicsNo">不需要</button></div><div id="caregiverFields" style="display:none"><input class="field" id="caregiver" placeholder="主要照顧者"><input class="field" id="relation" placeholder="關係"><input class="field" id="addressEmail" placeholder="地址（含郵遞區號）或 E-mail"><input class="field" id="phone" placeholder="電話" inputmode="tel"></div><div class="section" style="font-size:15px;margin-top:16px">結案原因</div><select class="field" id="closureReason"><option value="">請選擇</option><option>死亡</option><option>DAMA</option><option>轉安寧病房</option><option>轉病房</option><option>其他</option></select><input class="field" id="closureOther" placeholder="其他原因（選擇其他時填寫）" style="display:none"><input class="field" id="closureDate" type="date"><input class="field" id="primaryNurse" placeholder="主護（正式版可由院內帳號帶入）"><input class="field" id="nurseSupervisor" placeholder="護理主管（正式版可由院內帳號／流程帶入）"><button type="button" class="btn primary" id="saveClosure" style="width:100%;margin-top:12px">儲存結案資料</button><div class="tiny" id="closureSaved"></div></div></div>
+<div class="card summary" id="summary"><span class="badge" id="statusBadge">完成</span><div class="phase" id="phase">Phase —</div><div class="hint"><b>本量表不計算總分。</b> Phase 依各項分數換算後，取最高單項判定。</div><div class="hint" id="maxHint"></div><div class="rows" id="sumRows"></div>
+<div class="plan-box">
+<div class="section" style="font-size:16px">護理問題／措施建議</div>
+<div class="hint">依本次 <b>Phase ＋異常項目／觸發項目</b> 帶入建議。護理問題會依評估結果預選，可自行取消；護理措施僅提供提示，<b>不會預設為已執行</b>，請在實際採用／完成後勾選，再產生護理紀錄。</div>
+<div id="phaseCareHint" class="plan-phase"></div>
+<div class="plan-group"><div class="plan-title">建議護理問題</div><div id="problemSuggestions"></div></div>
+<div class="plan-group"><div class="plan-title">建議護理措施｜採用／完成後再勾選</div><div id="measureSuggestions"></div></div>
+<div class="plan-note">此區為 clinical decision support 提示，不取代護理師臨床判斷、醫囑、單位標準作業流程或院內既有護理計畫。若院內護理問題名稱有固定字典，可再將此處用語對應成正式名稱。</div>
+</div>
+<div class="record-box"><div class="section" style="font-size:16px">護理紀錄預覽</div><div class="hint">系統僅依本次已完成的 PCOC 評估產生紀錄草稿，不會自動寫入 HIS，也不會自行加入未確認的護理處置。請護理人員確認內容後再複製貼入護理紀錄。</div>
+<div class="switchline"><button type="button" class="chip on" id="recordAbnormalOnly">只顯示異常項目</button><span class="tiny" id="recordModeHint">目前僅列出分數 &gt; 0 的項目。</span></div>
+<textarea id="nursingRecordPreview" class="record-preview" aria-label="護理紀錄預覽"></textarea>
+<div class="record-actions"><button type="button" class="btn primary" id="copyNursingRecord">一鍵複製護理紀錄</button><button type="button" class="btn secondary" id="copyHandoff">複製交班摘要</button></div>
+<div class="tiny">可先在上方文字框自行修正內容，再按「一鍵複製護理紀錄」。若切換「只顯示異常項目」，系統會重新產生草稿。</div></div>
+<div id="spUploadPanel" class="upload-panel no-print" aria-label="SharePoint 儲存">
+   <div class="section" style="font-size:16px">儲存至 SharePoint（TEST）</div>
+   <div class="hint">請確認所有評估分數、Phase、護理問題與已勾選措施。<b>按下方按鈕才會真正新增一筆獨立評估</b>；同一病歷號可由不同評估者重複新增，不會覆蓋歷史。</div><div id="assessmentIdPreview" class="tiny" aria-live="polite">本次 assessment_id：完成評估預覽後產生</div>
+   <label class="upload-consent"><input type="checkbox" id="reviewConfirmed">我已核對本次評估內容，且資料均為 TEST 虛構資料。</label>
+   <button class="btn primary" type="button" id="spUploadBtn" style="width:100%;margin-top:9px" disabled>確認並上傳 SharePoint</button>
+   <div id="spUploadState" class="upload-state" role="status" aria-live="polite">尚未上傳：先完成評估並確認措施。</div>
+  </div>
+<div class="tiny">判定方式依原表：「單項分數最高分對照 Phase 分級」。本工具為減少重複查表與手算之輔助介面；正式臨床使用前仍請由單位核對原量表文字與流程。</div></div>
+</main>
+<div class="card no-print" id="qualityCard" hidden><div class="section">⑤ 品管資料｜Power BI-ready</div><div class="hint">本版僅測試 SharePoint 單向新增，不在本機保存評估；歷史與品管功能待院內核准 GET／Power BI 後開放。</div><div class="rows" id="qualityStats"></div><div class="switchline"><button class="chip" id="showHistory">歷史紀錄</button><button class="chip" id="exportCsv">Power BI CSV</button><button class="chip" id="exportDict">欄位字典 CSV</button><button class="chip" id="clearHistory">清除品管資料</button></div><div id="historyBox" style="display:none;margin-top:10px"></div></div>
+<div class="card no-print" id="biCard" hidden><div class="section">⑥ Power BI Dashboard｜院內展示預覽</div><div class="hint">這是前端模擬的 Dashboard 版型，讓護理部／品管先看到未來 Power BI 可呈現的樣子。可切換「本機真實紀錄」或「示範資料」；示範資料不會寫入品管紀錄。</div><div class="switchline"><button class="chip on" id="biReal">本機紀錄</button><button class="chip" id="biDemo">示範資料</button></div><div id="biDashboard" style="margin-top:12px"></div><div class="tiny">正式版可由 Power BI 連接 SharePoint List、Dataverse、SQL 或其他院內核准資料來源；是否能近即時更新取決於院內架構與 Power BI 授權／refresh 設定。</div></div>
+<div class="actions"><div class="wrap"><button class="btn secondary" id="reset">清除</button><button class="btn primary" id="finish">完成評估</button></div></div>
+<script src="./date-time.js"></script>
+<script>
+const eligibilityGroups=[
+ {id:'heart',name:'（一）心衰竭｜需符合至少 2 項',need:2,opts:['EF ≤20%','CHF 分期 ≥ III','曾 CPCR（含病史）','反覆心衰竭住院']},
+ {id:'brain',name:'（二）腦衰竭',need:1,opts:['嚴重腦傷／腦創傷／梗塞（出血／缺血）或缺氧性腦病變 1 週，GCS 仍 ≤8 分或瀕死徵象']},
+ {id:'lung',name:'（三）肺衰竭',need:1,opts:['肺纖維化、COPD 併 PaO₂ ≤55、PCO₂ ≥50、SpO₂ ≤88%、肺心症或肺高壓造成右心衰竭']},
+ {id:'liver',name:'（四）肝衰竭',need:1,opts:['PT INR >1.5 且 Alb <2.5，併肝性腦病變（NH₃ >72）、自發細菌性腹膜炎或食道靜脈瘤出血']},
+ {id:'renal',name:'（五）腎衰竭',need:1,opts:['急性：Cr >4，併洗腎或拒洗腎','慢性：ESRD 併洗腎，或 CKD ≥4 期（GFR <30）併洗腎或拒洗腎']},
+ {id:'cancer',name:'（六）癌末',need:1,opts:['癌轉移且對癌症治療效果不佳，並有高鈣、惡性疼痛、呼吸困難、發燒、腫瘤潰瘍或出血等症狀']},
+ {id:'hospice',name:'（七）安寧／末期判定',need:1,opts:['已會診安寧執行末期判定、診斷']},
+ {id:'other',name:'（八）其他',need:1,opts:['其他或罕見疾病']}
+];
+const eligSelected={};
+function renderEligibility(){const box=document.getElementById('eligibility');box.innerHTML='';eligibilityGroups.forEach(g=>{const wrap=document.createElement('div');const head=document.createElement('button');head.type='button';head.className='elig-head';head.innerHTML=`<span>${g.name}</span><span class="elig-arrow">⌄</span>`;const body=document.createElement('div');body.className='elig-body';head.onclick=()=>{head.classList.toggle('open');body.classList.toggle('open')};g.opts.forEach((t,i)=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=t;b.onclick=()=>{const k=g.id+'_'+i;eligSelected[k]=!eligSelected[k];b.classList.toggle('on',eligSelected[k]);updateEligibility()};body.appendChild(b)});wrap.appendChild(head);wrap.appendChild(body);box.appendChild(wrap)});const none=document.createElement('button');none.type='button';none.className='chip';none.id='noCriteria';none.style='margin-top:12px;width:100%';none.textContent='以上皆不符合';none.onclick=()=>{Object.keys(eligSelected).forEach(k=>delete eligSelected[k]);document.querySelectorAll('#eligibility .chip').forEach(x=>x.classList.remove('on'));none.classList.add('on');updateEligibility(true)};box.appendChild(none)}
+function updateEligibility(forceNone=false){const heart=eligibilityGroups[0].opts.filter((_,i)=>eligSelected['heart_'+i]).length;let qualified=heart>=2;eligibilityGroups.slice(1).forEach(g=>{if(g.opts.some((_,i)=>eligSelected[g.id+'_'+i]))qualified=true});const title=document.getElementById('eligibilityTitle'),hint=document.getElementById('eligibilityHint');if(forceNone){title.textContent='不符合收案條件';hint.textContent='目前八大條件皆不符合。';title.style.color='var(--danger)'}else if(qualified){title.textContent='✓ 符合收案條件';hint.textContent=heart>=2?'心衰竭條件已符合至少 2 項；可收案。':'第（二）至（八）項已有符合條件；可收案。';title.style.color='var(--accent)';document.getElementById('noCriteria')?.classList.remove('on')}else{title.textContent='尚未符合收案條件';hint.textContent=heart===1?'目前心衰竭僅符合 1 項，需至少 2 項；或確認第（二）至（八）項。':'請點選符合的條件。';title.style.color='var(--warn)';document.getElementById('noCriteria')?.classList.remove('on')}}
+const objectiveItems=[
+ {id:'pain',name:'疼痛分數',hint:'CPOT',opts:[['0','舒適｜CPOT 0–2'],['1','輕微疼痛｜CPOT 3–4'],['2','嚴重疼痛｜CPOT 5–7'],['3','非常痛苦｜CPOT ≥8']]},
+ {id:'gi',name:'腸胃道',hint:'包括腸蠕動減少',opts:[['0','無腸胃道症狀'],['1','噁心、嘔吐、進食少量（≤1/3 量）、腹脹等症狀只有 1 項'],['2','噁心、嘔吐、進食少量（≤1/3 量）、腹脹等症狀有 2–3 項'],['3','噁心、嘔吐、進食少量（≤1/3 量）、腹脹等症狀皆有']]},
+ {id:'edema',name:'水腫',hint:'',opts:[['0','無水腫'],['1','水腫 1–2+'],['2','水腫 3–4+'],['3','嚴重水腫合併發性水泡或滲液']]},
+ {id:'oral',name:'口腔清潔',hint:'收案後新增傷害',opts:[['0','口腔乾淨、完整'],['1','口乾、痰塊等，需加強口腔清潔步驟'],['2','口乾、痰塊且潰瘍，需增加保濕產品使用'],['3','口乾、痰塊且潰瘍伴流血，需照會醫療團隊增加用藥']]},
+ {id:'body',name:'身體清潔',hint:'指新增髒污、局部傷害',opts:[['0','乾淨無異味'],['1','身體異味，需加強清潔'],['2','有非手術傷口、管路照護需每班一次'],['3','有非手術傷口、管路照護每班 >1 次，需其他醫事人員協助']]},
+ {id:'turn',name:'翻身／壓傷',hint:'收案後新增壓傷',opts:[['0','無新增壓傷'],['1','使用敷料下無壓傷'],['2','使用敷料仍有壓傷'],['3','經常翻身擺位且加強防壓敷料，仍易發紅且有新壓傷，需照護醫療團隊']]},
+ {id:'accept',name:'家屬｜接受病人即將死亡程度',hint:'此區為家屬每日評估',family:true,opts:[['0','完全了解（臨終；幾天內死亡）'],['1','大部分了解（惡化；治療後功能逐漸下降或症狀加劇）'],['2','部分了解（不穩定；出現新問題或症狀急速惡化）'],['3','沒有準備（覺得症狀與問題有適當地被控制住）']]},
+ {id:'prep',name:'家屬｜後事準備度',hint:'死亡地點、出院方式、完成四道、衣物',family:true,opts:[['0','已準備好（4 項）'],['1','大部分準備（至少 3 項）'],['2','部分準備（1–2 項）'],['3','沒有準備']]},
+ {id:'grief',name:'家屬｜哀傷表現',hint:'',family:true,opts:[['0','無哭泣，可對答'],['1','哭泣，可對答'],['2','持續哭泣，無法應對'],['3','持續哭泣且有自責、自傷行為']]}
+];
+const sasItems=[
+ {id:'sleep',name:'睡眠困擾'},{id:'appetite',name:'食慾困擾'},{id:'nausea',name:'噁心嘔吐'},{id:'gi_sas',name:'腸胃不適'},{id:'dyspnea',name:'呼吸困難'},{id:'fatigue',name:'倦怠疲憊'},{id:'pain_sas',name:'疼痛'}
+];
+const scores={}; let status='每日'; let includeFamily=true; let consciousness=null;
+function patientItems(){return consciousness==='awake'?sasItems:consciousness==='unconscious'?objectiveItems.filter(x=>!x.family):[]}
+function familyItems(){return objectiveItems.filter(x=>x.family)}
+function phaseFromScore(v,it){const isSAS=!!it&&sasItems.some(x=>x.id===it.id);v=Number(v);return isSAS?(v===0?0:v<=3?1:v<=7?2:3):v}
+
+function render(){const f=document.getElementById('form');f.innerHTML='';if(!consciousness){f.innerHTML='<div class="card"><div class="hint" style="margin:0">請先選擇「意識清楚」或「意識不清」。</div></div>';updateProgress();return;} patientItems().forEach(it=>{const c=document.createElement('div');c.className='card';c.innerHTML=`<div class="section">${it.name}</div><div class="hint">${it.hint||'請選最符合目前狀況的一項'}</div><div class="${consciousness==='awake'?'sas-options':'options'}"></div>`;const o=c.querySelector(consciousness==='awake'?'.sas-options':'.options');if(consciousness==='awake'){for(let v=0;v<=10;v++){const b=document.createElement('button');b.type='button';b.className='sas-btn';b.textContent=v;b.onclick=()=>{if(window.PCOC_UPLOAD_COMPLETE){alert('本次已上傳，請先清除再建立新筆');return}scores[it.id]=v;o.querySelectorAll('.sas-btn').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');updateProgress();document.getElementById('summary').style.display='none';window.PCOC_PENDING=null;window.PCOC_invalidateDraft?.()};o.appendChild(b)}const legend=document.createElement('div');legend.className='sas-legend';legend.style.gridColumn='1/-1';legend.textContent='0 無症狀｜1–3 輕微｜4–7 中度｜8–10 嚴重';o.appendChild(legend)}else{it.opts.forEach(([sc,t])=>{const b=document.createElement('button');b.type='button';b.className='opt s'+sc;b.innerHTML=`<b>${sc} 分</b>${t}`;b.onclick=()=>{if(window.PCOC_UPLOAD_COMPLETE){alert('本次已上傳，請先清除再建立新筆');return}scores[it.id]=+sc;o.querySelectorAll('.opt').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');updateProgress();document.getElementById('summary').style.display='none';window.PCOC_PENDING=null;window.PCOC_invalidateDraft?.()};o.appendChild(b)})}f.appendChild(c)});if(includeFamily)familyItems().forEach(it=>{const c=document.createElement('div');c.className='card';c.innerHTML=`<div class="section">${it.name}</div><div class="hint">${it.hint||'請選最符合目前狀況的一項'}</div><div class="options"></div>`;const o=c.querySelector('.options');it.opts.forEach(([sc,t])=>{const b=document.createElement('button');b.type='button';b.className='opt s'+sc;b.innerHTML=`<b>${sc} 分</b>${t}`;b.onclick=()=>{if(window.PCOC_UPLOAD_COMPLETE){alert('本次已上傳，請先清除再建立新筆');return}scores[it.id]=+sc;o.querySelectorAll('.opt').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');updateProgress();document.getElementById('summary').style.display='none';window.PCOC_PENDING=null;window.PCOC_invalidateDraft?.()};o.appendChild(b)});f.appendChild(c)});updateProgress()}
+function activeItems(){return [...patientItems(),...(includeFamily?familyItems():[])]}
+function updateProgress(){const a=activeItems();const done=a.filter(x=>scores[x.id]!==undefined).length;document.getElementById('bar').style.width=(a.length?done/a.length*100:0)+'%'}
+let nursingAbnormalOnly=true;
+let currentAssessmentId=null;
+
+const PHASE_CARE={
+  0:'Phase 0｜維持現有照護計畫，依原計畫持續評估。',
+  1:'Phase 1｜持續監測與追蹤症狀變化，確認既有照護措施效果。',
+  2:'Phase 2｜重新評估相關症狀與影響因素，檢視照護計畫與處置效果，必要時與醫療團隊討論。',
+  3:'Phase 3｜優先重新評估病況與高分症狀；依病人實際狀況及單位流程通知醫療團隊／啟動進一步處置。'
+};
+
+const NURSING_GUIDE={
+ sleep:{
+  problems:['睡眠型態紊亂'],
+  measures:['評估睡眠困擾原因、夜間干擾因素及休息品質','依病人狀況調整環境刺激與照護活動，提供適當休息時段']
+ },
+ appetite:{
+  problems:['營養攝取不足風險'],
+  measures:['評估食慾、實際進食量及影響進食因素','依需要檢視營養支持並與營養／醫療團隊討論']
+ },
+ nausea:{
+  problems:['噁心／嘔吐'],
+  measures:['評估噁心嘔吐發作頻率、誘因、內容物及與進食之關係','依醫囑執行相關處置並重新評估症狀改善情形']
+ },
+ gi_sas:{
+  problems:['腸胃道不適'],
+  measures:['評估腹脹、排便、進食量、噁心／嘔吐等腸胃症狀','檢視腸胃道相關照護與既有處置效果']
+ },
+ dyspnea:{
+  problems:['呼吸困難'],
+  measures:['重新評估呼吸頻率、呼吸型態、SpO₂及呼吸困難程度','確認現行氧療、姿勢與舒適措施是否適切','若呼吸困難持續或惡化，依病況及單位流程通知醫療團隊']
+ },
+ fatigue:{
+  problems:['疲憊／活動耐受不良'],
+  measures:['評估疲憊程度、活動耐受及可能影響因素','依病人耐受度安排活動與休息，減少不必要耗能']
+ },
+ pain_sas:{
+  problems:['疼痛'],
+  measures:['重新評估疼痛部位、性質、強度及影響','確認既有止痛措施與用藥效果並於介入後再評估']
+ },
+ pain:{
+  problems:['疼痛'],
+  measures:['依 CPOT 及臨床表現重新評估疼痛與不適來源','確認既有止痛／舒適措施效果並於介入後再評估']
+ },
+ gi:{
+  problems:['腸胃道不適'],
+  measures:['評估腹脹、噁心／嘔吐、排便及進食狀況','檢視腸胃道照護與相關處置效果，異常持續時依流程回報']
+ },
+ edema:{
+  problems:['水腫','皮膚破損高危險群'],
+  measures:['評估水腫部位與程度、皮膚狀況及輸出入量','加強水腫部位皮膚保護與壓力照護，依病況持續追蹤']
+ },
+ oral:{
+  problems:['口腔組織損傷'],
+  measures:['評估口腔黏膜、乾燥、潰瘍、痰塊及出血情形','依照護計畫加強口腔清潔與保濕；若潰瘍／出血惡化依流程回報']
+ },
+ body:{
+  problems:['皮膚完整性受損／身體清潔需求'],
+  measures:['評估皮膚、非手術傷口及管路周邊狀況','依需要執行清潔、傷口與管路照護並持續評估']
+ },
+ turn:{
+  problems:['皮膚破損高危險群／壓傷風險'],
+  measures:['評估受壓部位皮膚與壓傷風險','依病況執行翻身擺位、減壓及防壓措施並追蹤皮膚變化']
+ },
+ accept:{
+  problems:['善終照護需求／病情理解不足'],
+  measures:['評估病人／家屬對病況與可能病程的理解及主要擔憂','與醫療團隊提供一致資訊，依需要連結安寧或跨專業支持']
+ },
+ prep:{
+  problems:['善終準備需求'],
+  measures:['評估家屬對後續照護、死亡地點、出院方式與相關準備需求','依需要連結安寧、社工或其他跨專業資源']
+ },
+ grief:{
+  problems:['哀傷'],
+  measures:['評估家屬哀傷反應、因應能力與支持系統','提供情緒支持與陪伴；若持續無法應對、自責或有自傷風險，立即依流程通知醫療團隊並確保安全']
+ }
+};
+
+function htmlEscape(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function buildSuggestions(){
+ const a=activeItems();
+ if(!a.length)return {phase:0,triggers:[],problems:[],measures:[]};
+ const phase=Math.max(...a.map(it=>phaseFromScore(scores[it.id],it)));
+ const triggers=a.filter(it=>phaseFromScore(scores[it.id],it)===phase).map(it=>it.id);
+ const abnormal=a.filter(it=>Number(scores[it.id])>0);
+ const sourceItems=[...abnormal].sort((x,y)=>(triggers.includes(y.id)?1:0)-(triggers.includes(x.id)?1:0));
+ const problemMap=new Map(), measureMap=new Map();
+ sourceItems.forEach(it=>{
+   const guide=NURSING_GUIDE[it.id]; if(!guide)return;
+   (guide.problems||[]).forEach(t=>{if(!problemMap.has(t))problemMap.set(t,{text:t,sources:[],priority:false});const o=problemMap.get(t);o.sources.push(it.name.replace('家屬｜',''));if(triggers.includes(it.id))o.priority=true});
+   (guide.measures||[]).forEach(t=>{if(!measureMap.has(t))measureMap.set(t,{text:t,sources:[],priority:false});const o=measureMap.get(t);o.sources.push(it.name.replace('家屬｜',''));if(triggers.includes(it.id))o.priority=true});
+ });
+ // Phase 層級提示本身也列為一項措施，但不預選。
+ const phaseText=PHASE_CARE[phase]||'';
+ if(phaseText) measureMap.set(phaseText,{text:phaseText,sources:['Phase '+phase],priority:phase>=2});
+ return {phase,triggers,problems:[...problemMap.values()],measures:[...measureMap.values()]};
+}
+function selectedPlan(type){
+ return [...document.querySelectorAll(`#${type==='problem'?'problemSuggestions':'measureSuggestions'} input[data-plan]:checked`)].map(x=>x.dataset.plan);
+}
+function renderNursingSuggestions(){
+ const s=buildSuggestions();
+ document.getElementById('phaseCareHint').innerHTML=`<b>${htmlEscape(PHASE_CARE[s.phase]||'')}</b>`;
+ const pb=document.getElementById('problemSuggestions'), mb=document.getElementById('measureSuggestions');
+ pb.innerHTML=s.problems.length?s.problems.map((o,i)=>`<label class="plan-check ${o.priority?'priority':''}"><input type="checkbox" data-plan-type="problem" data-plan="${htmlEscape(o.text)}" checked><span><b>${htmlEscape(o.text)}</b>${o.priority?'<span class="badge" style="margin-left:6px">最高 Phase 觸發</span>':''}<span class="plan-source">來源：${htmlEscape([...new Set(o.sources)].join('、'))}</span></span></label>`).join(''):'<div class="tiny">本次無分數 &gt; 0 的護理問題建議。</div>';
+ mb.innerHTML=s.measures.map(o=>`<label class="plan-check ${o.priority?'priority':''}"><input type="checkbox" data-plan-type="measure" data-plan="${htmlEscape(o.text)}"><span>${htmlEscape(o.text)}${o.priority?'<span class="badge" style="margin-left:6px">優先提示</span>':''}<span class="plan-source">來源：${htmlEscape([...new Set(o.sources)].join('、'))}</span></span></label>`).join('');
+ document.querySelectorAll('#problemSuggestions input[data-plan],#measureSuggestions input[data-plan]').forEach(x=>x.addEventListener('change',()=>{renderNursingRecordPreview();syncCurrentPlanToStoredRecord()}));
+}
+
+function finish(){
+ if(!window.PCOC_AUTH_ACCOUNT){alert('請先登入奇美 M365 帳號');return}
+ if(window.PCOC_UPLOAD_COMPLETE){alert('本次紀錄已成功上傳。要建立下一筆請先按「清除」重填。');return}
+ if(window.PCOC_UPLOAD_UNCERTAIN){alert('上一筆上傳結果尚未確認，請先在 SharePoint 依 assessment_id 查核，避免重複送出。');return}
+ const cid=document.getElementById('caseId').value.trim();
+ if(!cid){alert('請先輸入虛構病歷號（測試可用 TEST-001）');document.getElementById('caseId').focus();return}
+ if(!/^TEST[-_]/i.test(cid)){alert('目前僅允許 TEST- 開頭的虛構 Case ID；不可輸入真實病歷號。');return}
+ const timeField=document.getElementById('encounterDateTime');
+ try {
+   const admittedTaipei=window.PCOC_TIME.fromInput(timeField.value);
+   if(Date.parse(admittedTaipei)>Date.now()+5*60*1000){alert('住院時間不可晚於目前時間，請核對。');timeField.focus();return;}
+ } catch(_) {alert('請選擇正確的住院起始日期與時間（精準到分鐘）。');timeField.focus();return;}
+ if(!document.getElementById('date').value || !document.getElementById('unit').value || !document.getElementById('shift').value){alert('請填寫評估日期、病房別與班別，以利 SharePoint／Power BI 統計。');return}
+ if(!consciousness){alert('請先選擇病人意識狀態');return}
+ const a=activeItems();
+ if(a.some(x=>scores[x.id]===undefined)){
+   const miss=a.filter(x=>scores[x.id]===undefined)[0];
+   alert('還有未完成項目：'+miss.name);
+   alert('請完成後再送出');
+   return
+ }
+ const vals=a.map(x=>phaseFromScore(scores[x.id],x));
+ const max=Math.max(...vals);
+ const maxItems=a.filter(x=>phaseFromScore(scores[x.id],x)===max).map(x=>x.name.replace('家屬｜',''));
+ document.getElementById('phase').textContent='Phase '+max;
+ document.getElementById('maxHint').textContent='最高單項／Phase 觸發項目：'+maxItems.join('、');
+ document.getElementById('statusBadge').textContent='預覽完成・尚未上傳';
+ const rows=document.getElementById('sumRows');
+ rows.innerHTML='';
+ a.forEach(it=>{rows.innerHTML+=`<div class="row"><span>${it.name}</span><strong>${scores[it.id]} 分</strong></div>`});
+ renderNursingSuggestions();
+ renderNursingRecordPreview();
+ const s=document.getElementById('summary');
+ s.style.display='block';
+ s.scrollIntoView({behavior:'smooth',block:'start'});
+ window.PCOC_PENDING = makePCOCDraft(max);
+ document.getElementById('assessmentIdPreview').textContent='本次 assessment_id：'+window.PCOC_PENDING.assessment_id;
+ if(typeof window.PCOC_prepareUpload==='function')window.PCOC_prepareUpload();
+}
+
+function scoreListText(items, abnormalOnly){
+ const selected=items.filter(it=>scores[it.id]!==undefined && (!abnormalOnly || Number(scores[it.id])>0));
+ if(!selected.length) return '各項均為 0 分';
+ return selected.map(it=>`${it.name.replace('家屬｜','')} ${scores[it.id]} 分`).join('、');
+}
+
+function nursingRecordText(abnormalOnly=nursingAbnormalOnly){
+ const a=activeItems();
+ if(!a.length) return '';
+ const phase=Math.max(...a.map(x=>phaseFromScore(scores[x.id],x)));
+ const triggers=a.filter(x=>phaseFromScore(scores[x.id],x)===phase).map(x=>x.name.replace('家屬｜',''));
+ const mode=consciousness==='awake'?'意識清楚':'意識不清';
+ const type=status||'每日';
+ const parts=[`PCOC 症狀評估（${type}）：病人${mode}。`];
+ const pItems=patientItems();
+ if(consciousness==='awake'){
+   const na=document.getElementById('sasNaReason').value.trim();
+   parts.push(`SAS：${scoreListText(pItems,abnormalOnly)}。`);
+   if(na) parts.push(`SAS 不適用原因：${na}。`);
+ }else{
+   parts.push(`客觀評估：${scoreListText(pItems,abnormalOnly)}。`);
+ }
+ if(includeFamily){
+   parts.push(`社會／心理／靈性評估：${scoreListText(familyItems(),abnormalOnly)}。`);
+ }
+ parts.push(`單項最高對應 Phase ${phase}，觸發項目：${triggers.join('、')}。`);
+ const probs=selectedPlan('problem'), measures=selectedPlan('measure');
+ if(probs.length) parts.push(`護理問題：${probs.join('、')}。`);
+ if(measures.length) parts.push(`護理措施：${measures.join('；')}。`);
+ return parts.join('');
+}
+
+function renderNursingRecordPreview(){
+ const ta=document.getElementById('nursingRecordPreview');
+ if(!ta) return;
+ ta.value=nursingRecordText(nursingAbnormalOnly);
+ const btn=document.getElementById('recordAbnormalOnly');
+ const hint=document.getElementById('recordModeHint');
+ btn.classList.toggle('on',nursingAbnormalOnly);
+ btn.textContent=nursingAbnormalOnly?'只顯示異常項目':'顯示全部項目';
+ hint.textContent=nursingAbnormalOnly?'目前僅列出分數 > 0 的項目。':'目前列出所有已完成評估項目（含 0 分）。';
+}
+
+function summaryText(){
+ const d=document.getElementById('date').value||'未填日期',
+       cid=document.getElementById('caseId').value.trim(),
+       dx=document.getElementById('dx').value.trim();
+ const a=activeItems();
+ const phase=Math.max(...a.map(x=>phaseFromScore(scores[x.id],x)));
+ const mode=consciousness==='awake'?'意識清楚 SAS':'意識不清客觀評估';
+ return `${d} ${status||'每日'}｜${mode} Phase ${phase}${cid?'｜ID: '+cid:''}${dx?'｜Dx: '+dx:''}\n`+
+   a.map(it=>`${it.name.replace('家屬｜','')}: ${scores[it.id]}`).join('；')+
+   '。\nPhase 依單項最高分判定，不計算總分。';
+}
+
+async function copyTextRobust(text, successMessage){
+ try{
+   if(navigator.clipboard && window.isSecureContext){
+     await navigator.clipboard.writeText(text);
+   }else{
+     const ta=document.createElement('textarea');
+     ta.value=text;
+     ta.setAttribute('readonly','');
+     ta.style.position='fixed';
+     ta.style.opacity='0';
+     document.body.appendChild(ta);
+     ta.select();
+     const ok=document.execCommand('copy');
+     ta.remove();
+     if(!ok) throw new Error('copy failed');
+   }
+   alert(successMessage);
+ }catch(e){
+   prompt('自動複製未成功，請手動複製以下內容：',text);
+ }
+}
+
+function copyNursingRecord(){
+ const ta=document.getElementById('nursingRecordPreview');
+ const text=(ta?.value||'').trim();
+ if(!text){alert('目前沒有可複製的護理紀錄內容');return}
+ copyTextRobust(text,'已複製護理紀錄草稿，請貼入 HIS 後再次確認內容。');
+}
+
+function copySummary(){
+ copyTextRobust(summaryText(),'已複製交班摘要');
+}
+
+function save(){} // V1.9: 不再將評估資料存到 localStorage。
+const RECORD_KEY='pcoc-qc-records-v3';
+function getRecords(){return []} // V1.9: 移除本機病人資料歷史。
+function eligibilitySnapshot(){const checked=[...document.querySelectorAll('#eligibilityStatic input[data-eg]:checked')];const heart=checked.filter(x=>x.dataset.eg==='0').length;const other=checked.some(x=>x.dataset.eg!=='0');return {qualified:heart>=2||other,heart_count:heart,criteria:checked.map(x=>x.parentElement.innerText.trim()).join('｜')}}
+function makePCOCDraft(phase){
+ const a=activeItems(),elig=eligibilitySnapshot();
+ const phased=a.map(it=>({id:it.id,name:it.name,raw:scores[it.id],p:phaseFromScore(scores[it.id],it)}));
+ const maxp=Math.max(...phased.map(x=>x.p));
+ const triggers=phased.filter(x=>x.p===maxp).map(x=>x.id).join('|');
+ const rawScoreFields=['sleep','appetite','nausea','gi_sas','dyspnea','fatigue','pain_sas','pain','gi','edema','oral','body','turn','accept','prep','grief'];
+ const r={
+  // 一筆評估一個 UUID；同一次預覽修改時沿用，按「清除」才產生下一個。禁止弱亂數 fallback。
+  assessment_id:(currentAssessmentId ||= crypto.randomUUID()),
+  record_id:(window.PCOC_AUTH_ACCOUNT?.username || '').trim().toLowerCase(),
+  saved_at:window.PCOC_TIME.now(),app_version:'1.9.3',data_schema_version:6,date:date.value||'',
+  case_id:caseId.value.trim(),patient_link_mode:patientLinkMode,
+  assessor_ref:(window.PCOC_AUTH_ACCOUNT?.localAccountId || window.PCOC_AUTH_ACCOUNT?.username || ''),encounter_id:window.PCOC_TIME.fromInput(document.getElementById('encounterDateTime').value),
+  diagnosis:dx.value.trim(),unit:document.getElementById('unit').value,shift:document.getElementById('shift').value,
+  assessment_type:status||'每日',consciousness:consciousness,phase:phase,highest_item_score:'',trigger_items:triggers,
+  care_priority:PHASE_CARE[phase]||'',nursing_problems:selectedPlan('problem').join('|'),nursing_measures_confirmed:selectedPlan('measure').join('|'),
+  include_family:includeFamily?1:0,eligibility:elig.qualified?1:0,eligibility_criteria:elig.criteria,
+  sas_na_reason:(consciousness==='awake'?document.getElementById('sasNaReason').value.trim():'')
+ };
+ // 先建立所有 raw score 欄位；未評估欄位保持空白，不可寫成 0。
+ rawScoreFields.forEach(k=>r[k]='');
+ // 直接由 scores snapshot 寫入，避免只存 Phase 而遺失各單項分數。
+ a.forEach(it=>{if(scores[it.id]!==undefined && scores[it.id]!==null) r[it.id]=Number(scores[it.id]);});
+ const triggerRaws=phased.filter(x=>x.p===maxp).map(x=>Number(x.raw)); r.highest_item_score=[...new Set(triggerRaws)].join('|');
+ const relevant=(consciousness==='awake'?['sleep','appetite','nausea','gi_sas','dyspnea','fatigue','pain_sas']:['pain','gi','edema','oral','body','turn']); const missing=relevant.filter(k=>r[k]===''); if(missing.length){throw new Error('評分欄位缺失：'+missing.join(', '))} return r;
+}
+function syncCurrentPlanToStoredRecord(){
+ if(!window.PCOC_PENDING || window.PCOC_UPLOAD_COMPLETE)return;
+ window.PCOC_PENDING.nursing_problems=selectedPlan('problem').join('|');
+ window.PCOC_PENDING.nursing_measures_confirmed=selectedPlan('measure').join('|');
+ if(typeof window.PCOC_markEdited==='function')window.PCOC_markEdited();
+}
+function renderQuality(){const rs=getRecords(),box=document.getElementById('qualityStats');if(!rs.length){box.innerHTML='<div class="row"><span>已儲存評估</span><strong>0 筆</strong></div><div class="tiny">完成第一筆評估後，這裡會顯示 Phase 分布與清醒／不清醒筆數。</div>';return}const phases=[0,1,2,3].map(p=>rs.filter(r=>+r.phase===p).length),awake=rs.filter(r=>r.consciousness==='awake').length,unc=rs.filter(r=>r.consciousness==='unconscious').length;box.innerHTML=`<div class="row"><span>已儲存評估</span><strong>${rs.length} 筆</strong></div><div class="row"><span>清醒／不清醒</span><strong>${awake}／${unc}</strong></div><div class="row"><span>Phase 0／1／2／3</span><strong>${phases.join('／')}</strong></div><div class="row"><span>Phase 2–3 比例</span><strong>${Math.round((phases[2]+phases[3])*100/rs.length)}%</strong></div>`}
+function csvEscape(v){v=v??'';v=String(v);return (v.includes(',')||v.includes('"')||v.includes('\n'))?'"'+v.replaceAll('"','""')+'"':v}
+function exportCSV(){const rs=getRecords();if(!rs.length){alert('目前沒有可匯出的品管資料');return}const cols=['assessment_id','record_id','saved_at','app_version','data_schema_version','date','case_id','patient_link_mode','assessor_ref','encounter_id','diagnosis','unit','shift','assessment_type','consciousness','phase','highest_item_score','trigger_items','care_priority','nursing_problems','nursing_measures_confirmed','include_family','eligibility','eligibility_criteria','sas_na_reason','sleep','appetite','nausea','gi_sas','dyspnea','fatigue','pain_sas','pain','gi','edema','oral','body','turn','accept','prep','grief'];const csv='\ufeff'+[cols.join(','),...rs.map(r=>cols.map(c=>csvEscape(r[c])).join(','))].join('\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='PCOC_QC_schema6_'+window.PCOC_TIME.today()+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function renderHistory(){const hb=document.getElementById('historyBox'),rs=getRecords().slice().reverse();hb.innerHTML=rs.length?rs.slice(0,50).map(r=>`<div class="row"><span>${r.date||'未填日期'}｜${r.case_id||'無代碼'}｜${r.assessment_type}<br><span class="tiny">${r.consciousness==='awake'?'清醒 SAS':'不清醒客觀評估'}</span></span><strong>Phase ${r.phase}</strong></div>`).join(''):'<div class="tiny">尚無紀錄</div>'}
+
+const FIELD_DICT=[
+['assessment_id','Text','每次獨立評估的 UUID／唯一鍵'],['record_id','Text','實際填寫護理師的 M365 UPN／可重複'],['saved_at','DateTime','資料儲存時間'],['app_version','Text','前端版本'],['data_schema_version','Whole number','資料結構版本'],['date','Date','評估日期'],['case_id','Text','病歷號 MRN；評估明細允許同一病人多筆'],['patient_link_mode','Text','manual／demo-linked；正式版可改為 HIS/API'],['assessor_ref','Text','MSAL 帳號識別（優先 Entra 本地 account ID）'],['encounter_id','DateTime','目前代表住院起始時間（台灣時間輸入；+08:00 明確標示時區）；未來 HIS 住院事件 ID 需另外拆分為 Text，並新建 admitted_at DateTime'],['diagnosis','Text','主要診斷；避免可識別資訊'],['unit','Text','病房別：3BI team 1／3BI team 2／3CI／4BI／5CI／6BI／燒傷加護病房／RCC'],['shift','Text','班別'],['assessment_type','Text','每日／惡化班／死亡班'],['consciousness','Text','awake／unconscious'],['phase','Whole number','最終 Phase 0–3'],['highest_item_score','Text','最終 Phase 觸發項目的原始分數；不同量尺同時觸發時以 | 分隔，不作加總'],['trigger_items','Text','造成最高 Phase 的項目 ID；多項以 | 分隔'],['care_priority','Text','依 Phase 產生的照護層級提示'],['nursing_problems','Text','依評估結果預選且護理師確認保留之護理問題；多項以 | 分隔'],['nursing_measures_confirmed','Text','護理師實際勾選採用／完成之措施；多項以 | 分隔'],['include_family','Whole number','1=納入病人／家屬評估'],['eligibility','Whole number','1=符合收案'],['eligibility_criteria','Text','符合的收案條件'],['sas_na_reason','Text','清醒 SAS 不適用原因（如適用）']
+];
+function exportDictionary(){const extra=[...sasItems,...objectiveItems].map(x=>[x.id,'Whole number',x.name+' score']);const rows=[...FIELD_DICT,...extra];const csv='\ufeff'+[['field_name','data_type','description'],...rows].map(r=>r.map(csvEscape).join(',')).join('\n');downloadText(csv,'PCOC_PowerBI_DataDictionary.csv','text/csv;charset=utf-8')}
+function downloadText(txt,name,type){const blob=new Blob([txt],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+const DEMO=[
+{phase:0,consciousness:'awake',assessment_type:'每日',trigger_items:'sleep',dyspnea:0,pain_sas:0},{phase:1,consciousness:'awake',assessment_type:'每日',trigger_items:'fatigue',fatigue:3},{phase:2,consciousness:'awake',assessment_type:'每日',trigger_items:'dyspnea',dyspnea:6},{phase:3,consciousness:'awake',assessment_type:'惡化班',trigger_items:'dyspnea',dyspnea:9},{phase:2,consciousness:'unconscious',assessment_type:'每日',trigger_items:'pain',pain:2},{phase:1,consciousness:'unconscious',assessment_type:'每日',trigger_items:'edema',edema:1},{phase:3,consciousness:'unconscious',assessment_type:'惡化班',trigger_items:'pain|turn',pain:3,turn:3},{phase:2,consciousness:'awake',assessment_type:'每日',trigger_items:'pain_sas',pain_sas:7},{phase:1,consciousness:'awake',assessment_type:'每日',trigger_items:'sleep',sleep:2},{phase:2,consciousness:'unconscious',assessment_type:'每日',trigger_items:'gi',gi:2},{phase:3,consciousness:'awake',assessment_type:'死亡班',trigger_items:'dyspnea',dyspnea:10},{phase:1,consciousness:'unconscious',assessment_type:'每日',trigger_items:'oral',oral:1}
+];
+let biDemo=false;
+function renderBIDashboard(){const rs=biDemo?DEMO:getRecords(),box=document.getElementById('biDashboard');if(!rs.length){box.innerHTML='<div class="empty">目前尚無本機紀錄。可先完成幾筆測試評估，或點「示範資料」預覽 Dashboard。</div>';return}const n=rs.length,ph=[0,1,2,3].map(p=>rs.filter(r=>+r.phase===p).length),hi=ph[2]+ph[3],awake=rs.filter(r=>r.consciousness==='awake').length;const counts={};rs.forEach(r=>(r.trigger_items||'').split('|').filter(Boolean).forEach(k=>counts[k]=(counts[k]||0)+1));const names={sleep:'睡眠',appetite:'食慾',nausea:'噁心嘔吐',gi_sas:'腸胃不適',dyspnea:'呼吸困難',fatigue:'倦怠',pain_sas:'疼痛(SAS)',pain:'疼痛(CPOT)',gi:'腸胃道',edema:'水腫',oral:'口腔',body:'身體清潔',turn:'翻身/壓傷',accept:'家屬接受度',prep:'後事準備',grief:'哀傷'};const top=Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,5);const phaseBars=ph.map((v,i)=>`<div class="barrow"><span>Phase ${i}</span><div class="track"><div class="fill" style="width:${v/n*100}%"></div></div><strong>${v}</strong></div>`).join('');const topBars=top.map(([k,v])=>`<div class="barrow"><span>${names[k]||k}</span><div class="track"><div class="fill" style="width:${v/(top[0]?.[1]||1)*100}%"></div></div><strong>${v}</strong></div>`).join('')||'<div class="tiny">尚無 trigger data</div>';box.innerHTML=`<div class="kpis"><div class="kpi"><span class="tiny">評估筆數</span><div class="n">${n}</div></div><div class="kpi"><span class="tiny">Phase ≥2</span><div class="n">${Math.round(hi*100/n)}%</div></div><div class="kpi"><span class="tiny">清醒／不清醒</span><div class="n">${awake}/${n-awake}</div></div><div class="kpi"><span class="tiny">惡化／死亡班</span><div class="n">${rs.filter(r=>r.assessment_type!=='每日').length}</div></div></div><div class="bi-grid" style="margin-top:10px"><div class="panel"><h4>Phase distribution</h4>${phaseBars}</div><div class="panel"><h4>Top trigger items</h4>${topBars}</div></div>`}
+
+// --- V1.8 院內病人連結介面（prototype only） ---
+let patientLinkMode='manual';
+function maskTestId(v){v=(v||'').trim();return v.length<=4?v:'••••'+v.slice(-4)}
+function demoLinkPatient(){
+  const staff=document.getElementById('assessorId').value.trim();
+  const patient=document.getElementById('patientLookup').value.trim();
+  if(!staff||!patient){alert('Prototype：請先輸入虛構的員工編號與病歷／條碼測試值。');return}
+  if(!/^TEST/i.test(staff)||!/^TEST/i.test(patient)){
+    alert('這是公開／本機 prototype，請勿輸入真實員工編號或病歷號。請使用 TEST 開頭的虛構編號。');return
+  }
+  const token=(patient.replace(/[^A-Za-z0-9]/g,'').slice(-8)||Date.now().toString().slice(-6)).toUpperCase();
+  document.getElementById('caseId').value='AUTO-'+token;
+  patientLinkMode='demo-linked';
+  document.getElementById('linkStatus').textContent='✓ 已模擬連結 '+maskTestId(patient);
+  document.getElementById('caseSource').textContent='Prototype：Case ID 由模擬院內介接自動帶入；未儲存病歷號。';
+  document.getElementById('patientLookup').value='';
+}
+document.getElementById('linkPatient').onclick=demoLinkPatient;
+document.getElementById('scanMock').onclick=()=>{
+  document.getElementById('patientLookup').value='TEST-MRN-'+String(Math.floor(Math.random()*900000)+100000);
+  document.getElementById('patientLookup').focus();
+};
+
+const CLOSURE_KEY='pcoc-closure-records-v1';
+let closureMode=false, ethicsNeed='';
+function setClosureMode(on){closureMode=on;document.getElementById('closureFields').style.display=on?'block':'none';document.getElementById('closureOn').classList.toggle('on',on);document.getElementById('closureOff').classList.toggle('on',!on)}
+function setEthics(v){ethicsNeed=v;document.getElementById('ethicsYes').classList.toggle('on',v==='需要');document.getElementById('ethicsNo').classList.toggle('on',v==='不需要');document.getElementById('caregiverFields').style.display=v==='需要'?'block':'none'}
+function saveClosure(){alert('V1.9.3 結案資料尚未建立獨立 SharePoint 串接，為避免個資存入本機，本功能目前停用。')}
+document.getElementById('closureOn').onclick=()=>setClosureMode(true);document.getElementById('closureOff').onclick=()=>setClosureMode(false);document.getElementById('ethicsYes').onclick=()=>setEthics('需要');document.getElementById('ethicsNo').onclick=()=>setEthics('不需要');document.getElementById('closureReason').onchange=e=>document.getElementById('closureOther').style.display=e.target.value==='其他'?'block':'none';document.getElementById('saveClosure').onclick=saveClosure;
+function resetAll(){
+ if(window.PCOC_UPLOAD_UNCERTAIN){alert('上傳結果尚未確認，請先在 SharePoint 依 assessment_id 查核。為避免重複寫入，本頁暫不允許清除本筆。');return;}
+ if(!confirm('清除本次評估？若尚未上傳，草稿將無法恢復。'))return;
+ window.PCOC_PENDING=null;window.PCOC_UPLOAD_COMPLETE=false;window.PCOC_UPLOAD_UNCERTAIN=false;
+ window.PCOC_resetUpload?.();
+ Object.keys(scores).forEach(k=>delete scores[k]);
+ document.querySelectorAll('#pcocApp input,#pcocApp select').forEach(el=>el.disabled=false);
+ document.getElementById('finish').disabled=false;
+ ['caseId','encounterDateTime','dx','sasNaReason','patientLookup','assessorId'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+ ['unit','shift'].forEach(id=>document.getElementById(id).selectedIndex=0);
+ document.querySelectorAll('#eligibilityStatic input[type="checkbox"]').forEach(el=>el.checked=false);
+ document.getElementById('eligibilityTitle').textContent='尚未判定收案資格';
+ document.getElementById('eligibilityHint').textContent='請點選符合的條件；若皆不符合則不收案。';
+ document.querySelectorAll('.selected').forEach(x=>x.classList.remove('selected'));
+ document.getElementById('summary').style.display='none';
+ document.getElementById('nursingRecordPreview').value='';
+ document.getElementById('problemSuggestions').innerHTML='';
+ document.getElementById('measureSuggestions').innerHTML='';
+ currentAssessmentId=null;document.getElementById('assessmentIdPreview').textContent='本次 assessment_id：完成評估預覽後產生';patientLinkMode='manual';nursingAbnormalOnly=true;
+ status='每日';document.querySelectorAll('.chip[data-status]').forEach(x=>x.classList.toggle('on',x.dataset.status==='每日'));
+ consciousness=null;document.getElementById('awakeBtn').classList.remove('on');document.getElementById('unconsciousBtn').classList.remove('on');
+ document.getElementById('modeNote').textContent='尚未選擇意識狀態。';
+ document.getElementById('sasNaCard').style.display='none';
+ includeFamily=true;document.getElementById('familyOn').classList.add('on');document.getElementById('familyOff').classList.remove('on');
+ render();updateProgress();window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.chip[data-status]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.chip[data-status]').forEach(x=>x.classList.remove('on'));b.classList.add('on');status=b.dataset.status||'每日'});
+document.getElementById('familyOn').onclick=()=>{includeFamily=true;document.getElementById('familyOn').classList.add('on');document.getElementById('familyOff').classList.remove('on');render();updateProgress()};document.getElementById('familyOff').onclick=()=>{includeFamily=false;familyItems().forEach(x=>delete scores[x.id]);document.getElementById('familyOff').classList.add('on');document.getElementById('familyOn').classList.remove('on');render();updateProgress()};document.querySelectorAll('#eligibilityStatic input[type=checkbox]:not(#noneStatic)').forEach(cb=>cb.addEventListener('change',()=>{const heart=[...document.querySelectorAll('#eligibilityStatic input[data-eg="0"]')].filter(x=>x.checked).length;const other=[...document.querySelectorAll('#eligibilityStatic input[data-eg]:not([data-eg="0"])')].some(x=>x.checked);const qualified=heart>=2||other;const title=document.getElementById('eligibilityTitle'),hint=document.getElementById('eligibilityHint');document.getElementById('noneStatic').checked=false;if(qualified){title.textContent='✓ 符合收案條件';title.style.color='var(--accent)';hint.textContent=heart>=2?'心衰竭條件已符合至少 2 項；可收案。':'第（二）至（八）項已有符合條件；可收案。'}else{title.textContent='尚未符合收案條件';title.style.color='var(--warn)';hint.textContent=heart===1?'目前心衰竭僅符合 1 項，需至少 2 項；或確認第（二）至（八）項。':'請點選符合的條件。';}}));document.getElementById('noneStatic').addEventListener('change',e=>{if(e.target.checked){document.querySelectorAll('#eligibilityStatic input[data-eg]').forEach(x=>x.checked=false);document.getElementById('eligibilityTitle').textContent='不符合收案條件';document.getElementById('eligibilityTitle').style.color='var(--danger)';document.getElementById('eligibilityHint').textContent='目前八大條件皆不符合。';}});document.getElementById('awakeBtn').onclick=()=>{consciousness='awake';Object.keys(scores).forEach(k=>delete scores[k]);document.getElementById('awakeBtn').classList.add('on');document.getElementById('unconsciousBtn').classList.remove('on');document.getElementById('modeNote').textContent='目前使用：意識清楚 SAS 0–10；單項最高分轉換 Phase（0／1–3／4–7／8–10）。';document.getElementById('sasNaCard').style.display='block';render()};document.getElementById('unconsciousBtn').onclick=()=>{consciousness='unconscious';Object.keys(scores).forEach(k=>delete scores[k]);document.getElementById('unconsciousBtn').classList.add('on');document.getElementById('awakeBtn').classList.remove('on');document.getElementById('modeNote').textContent='目前使用：意識不清客觀評估 0–3；單項最高分即 Phase。';document.getElementById('sasNaCard').style.display='none';document.getElementById('sasNaReason').value='';render()};document.getElementById('finish').onclick=finish;document.getElementById('reset').onclick=resetAll;
+document.getElementById('recordAbnormalOnly').onclick=()=>{nursingAbnormalOnly=!nursingAbnormalOnly;renderNursingRecordPreview()};
+document.getElementById('copyNursingRecord').onclick=copyNursingRecord;
+document.getElementById('copyHandoff').onclick=copySummary;document.getElementById('exportCsv').onclick=exportCSV;document.getElementById('showHistory').onclick=()=>{const h=document.getElementById('historyBox');h.style.display=h.style.display==='none'?'block':'none';renderHistory()};document.getElementById('clearHistory').onclick=()=>{if(confirm('確定清除這台裝置內所有品管紀錄？此動作無法復原。')){localStorage.removeItem(RECORD_KEY);renderQuality();renderHistory()}};document.getElementById('exportDict').onclick=exportDictionary;document.getElementById('biReal').onclick=()=>{biDemo=false;document.getElementById('biReal').classList.add('on');document.getElementById('biDemo').classList.remove('on');renderBIDashboard()};document.getElementById('biDemo').onclick=()=>{biDemo=true;document.getElementById('biDemo').classList.add('on');document.getElementById('biReal').classList.remove('on');renderBIDashboard()};document.getElementById('date').value=window.PCOC_TIME.today();document.getElementById('closureDate').value=window.PCOC_TIME.today();setClosureMode(false);render();renderQuality();renderBIDashboard();
+</script>
+</div>
+<script src="./config.js"></script>
+</body></html>
